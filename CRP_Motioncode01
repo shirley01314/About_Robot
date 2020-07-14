@@ -1,0 +1,29 @@
+；以下是机械臂运动圆内接五角星的机器指令
+；程序名xyh1
+---------------------------------
+JUMP *xyh
+;ARCSTART#(1)
+;WEAVE#(1)
+;WEAVEEND#(1) 
+;ARCEND#(1)  
+*xyh
+MOVJ VJ=50% PL=0 TOOL=1       					;到达圆心O点
+MOVL VL=500MM/s PL=0  TOOL=1 					;弧顶A点
+MOVC VL=500MM/s PL=0  TOOL=1 POINT=2			;弧C点
+MOVC VL=500MM/s PL=0  TOOL=1 POINT=3			;弧D点
+MOVC VL=500MM/s PL=0  TOOL=1 POINT=2			;弧E点
+MOVC VL=500MM/s PL=0  TOOL=1 POINT=3			;回到弧A点
+;MOVCA VL=100mm/s PL=0 POINT=1 R=15 Dir=CCW  	;圆心O坐标(x0,y0,z0)
+TIME T=2000
+CALL fivestar 
+PAUSE
+JUMP *xyh
+
+子程序名fivestar
+MOVJ VJ=50mm/s PL=0  ;A(x0,y0,z0+r)
+MOVJ VJ=50mm/s PL=0  ;C(x0+88.2,y0,z0-121.35)
+MOVJ VJ=50mm/s PL=0  ;E(x0-142.65,y0,z0+46.35)
+MOVJ VJ=50mm/s PL=0  ;B(x0+142.65,y0,z0+46.35)
+MOVJ VJ=50mm/s PL=0  ;D(x0-88.2,y0,z0-121.35)
+MOVJ VJ=50mm/s PL=0  ;A(x0,y0,z0+r)
+RET
