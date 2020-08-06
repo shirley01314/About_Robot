@@ -80,7 +80,7 @@ for i = 1:1:1000  %循环迭代1000次
     if error(i) < 0.0001&&error1(i) < 0.0001&&error2(i) < 0.0001&&error3(i) < 0.0001&&error4(i) < 0.0001
             disp('求解完成')
         break
-    end
+    end 
     
 end
     
