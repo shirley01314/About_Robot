@@ -1,13 +1,13 @@
 function torque_list = NewtonEulerDynamics(dh_list, mass_list, mass_center_list, inertia_tensor_list, f_external)
-% ÊäÈë²ÎÊı£º
-% dh_list£º»úÆ÷ÈËDH²ÎÊı
-% mass_list: Á¬¸ËµÄÖÊÁ¿£¬µ¥Î»kg
-% mass_center_list£ºÁ¬¸ËÖÊĞÄÔÚÁ¬¸Ë×ø±êÏµÏÂµÄÎ»ÖÃ£¬µ¥Î»£ºm
-% inertia_tensor_list£ºÁ¬¸Ë¹ØÓÚÖÊĞÄ×ø±êÏµµÄ¹ßĞÔÕÅÁ¿£¬ÖÊĞÄ×ø±êÏµÓëÁ¬¸Ë×ø±êÏµ·½Î»Ò»ÖÂ
-% f_external£ºÊ©¼ÓÔÚÄ©¶ËÁ¬¸ËµÄÍâÁ¦ºÍÍâÁ¦¾Ø
+% è¾“å…¥å‚æ•°ï¼š
+% dh_listï¼šæœºå™¨äººDHå‚æ•°
+% mass_list: è¿æ†çš„è´¨é‡ï¼Œå•ä½kg
+% mass_center_listï¼šè¿æ†è´¨å¿ƒåœ¨è¿æ†åæ ‡ç³»ä¸‹çš„ä½ç½®ï¼Œå•ä½ï¼šm
+% inertia_tensor_listï¼šè¿æ†å…³äºè´¨å¿ƒåæ ‡ç³»çš„æƒ¯æ€§å¼ é‡ï¼Œè´¨å¿ƒåæ ‡ç³»ä¸è¿æ†åæ ‡ç³»æ–¹ä½ä¸€è‡´
+% f_externalï¼šæ–½åŠ åœ¨æœ«ç«¯è¿æ†çš„å¤–åŠ›å’Œå¤–åŠ›çŸ©
 
-% Êä³ö²ÎÊı£º
-% torque_list£ºÓÃq,dq,ddq£¨¹Ø½ÚÎ»ÖÃ¡¢ËÙ¶È¡¢¼ÓËÙ¶È£©±í´ïµÄ¹Ø½ÚÁ¦¾Ø
+% è¾“å‡ºå‚æ•°ï¼š
+% torque_listï¼šç”¨q,dq,ddqï¼ˆå…³èŠ‚ä½ç½®ã€é€Ÿåº¦ã€åŠ é€Ÿåº¦ï¼‰è¡¨è¾¾çš„å…³èŠ‚åŠ›çŸ©
 [rows, columns] = size(dh_list);
 number_of_links = rows - 1;
 if columns ~= 4
@@ -22,7 +22,7 @@ alpha = sym([]);
 theta = sym([]);
 
 for i = 1:rows
-    % ¶¨Òå¹Ø½ÚÎ»ÖÃ£¬ËÙ¶È£¬¼ÓËÙ¶È·ûºÅ
+    % å®šä¹‰å…³èŠ‚ä½ç½®ï¼Œé€Ÿåº¦ï¼ŒåŠ é€Ÿåº¦ç¬¦å·
     eval(['syms ','q',num2str(i),' real;']);
     eval(['syms ','dq',num2str(i),' real;']);
     eval(['syms ','ddq',num2str(i),' real;']);
@@ -45,18 +45,18 @@ for i = 1:rows
             sin(q(i))*sin(alpha(i)), cos(q(i))*sin(alpha(i)), cos(alpha(i)), cos(alpha(i))*d(i);
             0,                     0,                     0,          1];
     T = T(:,:,i);
-    % ÌáÈ¡Ğı×ª¾ØÕó²¢ÇóÄæ
+    % æå–æ—‹è½¬çŸ©é˜µå¹¶æ±‚é€†
     R(:,:,i) = simplify(inv(T(1:3,1:3)));
     P(:,:,i) = T(1:3,4:4);
 end
 
-% ¹Ø½ÚÖá
+% å…³èŠ‚è½´
 z = [0,0,1]';
-% ÖØÁ¦¼ÓËÙ¶È·ûºÅ
+% é‡åŠ›åŠ é€Ÿåº¦ç¬¦å·
 syms g real
 
-% ÍâÍÆ --->
-disp('ÍâÍÆ')  %0-5
+% å¤–æ¨ --->
+disp('å¤–æ¨')  %0-5
 for i = 0:number_of_links-1
     disp(i)
     if i == 0
@@ -81,8 +81,8 @@ end
 f = sym([]);
 n = sym([]);
 
-% ÄÚÍÆ <---
-disp('ÄÚÍÆ') %6-1
+% å†…æ¨ <---
+disp('å†…æ¨') %6-1
 for i = number_of_links:-1:1
     disp(i)
     if i == number_of_links
@@ -96,5 +96,6 @@ for i = number_of_links:-1:1
     n(:,:,i) = simplify(n(:,:,i));
     torque_list(i) = dot(n(:,:,i),z);
 end
-disp('µİÍÆÍê³É')
+disp('é€’æ¨å®Œæˆ')
 torque_list = torque_list';
+ 
