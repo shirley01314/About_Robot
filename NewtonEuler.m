@@ -53,6 +53,6 @@ torque2 = vpa(torque(2),4);
 torque3 = vpa(torque(3),4);
 torque4 = vpa(torque(4),4);
 torque5 = vpa(torque(5),4);
-torque6 = vpa(torque(6),4);
+torque6 = vpa(torque(6),4); 
 
 
