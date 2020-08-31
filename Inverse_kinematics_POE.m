@@ -19,7 +19,7 @@ for i = 1:1000
    errorw = norm(xitew)
    errorv = norm(xitev)
    %如果满足设定的误差最小值则停止循环
-   if errorw < 1e-8 || errorv <1e-8
+   if errorw < 1e-8 || errorv < 1e-8
        q = theta;
        break
    end
