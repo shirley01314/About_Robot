@@ -1,14 +1,14 @@
 function[q] = Modern_Robotics_IKsolver61(q0,Td)
-%ÏÖ´ú»úÆ÷ÈËÑ§ÀıÌâ6.1µÄÄæÔË¶¯Ñ§Çó½â
+%ç°ä»£æœºå™¨äººå­¦ä¾‹é¢˜6.1çš„é€†è¿åŠ¨å­¦æ±‚è§£
 theta = q0;
 for i = 1:10
    disp(i)
     T_sb = Modern_Robotics_FKsolver61(theta);
-    T_bd = inv(T_sb)*Td;  %ÒÔeÎªµ×
+    T_bd = inv(T_sb)*Td;  %ä»¥eä¸ºåº•
     Vb_frame = logm(T_bd);
     v = Vb_frame(1:3,4);
     w_frame = Vb_frame(1:3,1:3);
-    %ËÙ¶ÈĞıÁ¿Vb Î¬¶È6*1 
+    %é€Ÿåº¦æ—‹é‡Vb ç»´åº¦6*1 
     Vb = [w_frame(6);w_frame(7);w_frame(2);v];
     xitew = Vb(1:3);
     xitev = Vb(4:6);
@@ -18,9 +18,9 @@ for i = 1:10
        q = theta;
        break
     end 
-    %Èç¹ûÂú×ãÉè¶¨µÄÎó²î×îĞ¡ÖµÔòÍ£Ö¹Ñ­»·
-    %²»Âú×ãÌõ¼şÔòĞŞ¸ÄthetaµÄÖµ
-    %¼ÆËãµ±Ç°½Ç¶ÈµÄÎïÌåÑÅ¿Ë±È¾ØÕó
+    %å¦‚æœæ»¡è¶³è®¾å®šçš„è¯¯å·®æœ€å°å€¼åˆ™åœæ­¢å¾ªç¯
+    %ä¸æ»¡è¶³æ¡ä»¶åˆ™ä¿®æ”¹thetaçš„å€¼
+    %è®¡ç®—å½“å‰è§’åº¦çš„ç‰©ä½“é›…å…‹æ¯”çŸ©é˜µ
     J = Modern_Robotics_Jacobe61(theta);
     pinv(J)*Vb;
     theta = theta + pinv(J)*Vb;
@@ -32,7 +32,7 @@ for i = 1:10
            theta(j) = theta(j) - pi;
        end
     end
-   theta*180/pi
+   theta*180/pi 
 end
 
 end
