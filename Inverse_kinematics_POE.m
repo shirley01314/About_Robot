@@ -4,6 +4,7 @@ function[q] = Inverse_kinematics_POE(q0,Td)
 %如果初始估计值与真实值没有足够接近，则迭代过程可能不收敛
 %解出来的角度与初始角度有关
 theta = q0;
+%循环迭代1000次
 for i = 1:1000
    disp(i)
    T_sb = Forward_kinematics(theta);
