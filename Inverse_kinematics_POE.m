@@ -7,7 +7,7 @@ theta = q0;
 %循环迭代1000次
 for i = 1:1000
    disp(i)
-   T_sb = Forward_kinematics(theta);
+   T_sb = Forward_kinematics_POE(theta);
    T_bd = inv(T_sb)*Td;  %以e为底
    Vb_frame = logm(T_bd);
    v = Vb_frame(1:3,4);
